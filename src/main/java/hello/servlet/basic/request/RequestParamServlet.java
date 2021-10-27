@@ -21,7 +21,7 @@ import java.util.Enumeration;
 public class RequestParamServlet extends HttpServlet {
 
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {super.service(request, response);
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 1. request(요청) 파라미터 모두 조회하는 방법
         System.out.println("[전체 파라미터 조회] -  start");
         // paramName = 파라미터 이름 꺼내기 Ex. age, name
@@ -50,5 +50,9 @@ public class RequestParamServlet extends HttpServlet {
         for (String name:usernames){
             System.out.println("username = " + name);
         }
+
+        response.getWriter().write("ok");
+
+
     }
 }
