@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class MemberSaveController implements ControllerV1 {
+public class MemberSaveControllerV1 implements ControllerV1 {
 
     private MemberRepository memberRepository = MemberRepository.getInstance();
 
