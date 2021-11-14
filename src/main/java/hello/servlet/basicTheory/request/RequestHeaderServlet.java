@@ -1,4 +1,4 @@
-package hello.servlet.basic.request;
+package hello.servlet.basicTheory.request;
 
 
 import javax.servlet.ServletException;

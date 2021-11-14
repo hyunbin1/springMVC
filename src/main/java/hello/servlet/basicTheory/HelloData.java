@@ -1,4 +1,4 @@
-package hello.servlet.basic;
+package hello.servlet.basicTheory;
 /*
 * json 형식의 파일은 그대로 사용하지 않고 객체를 하나 생성한 후 사용한다(파싱).
 * 따라서 이 파일은 json의 객체로 바꾸는 파일이다.
