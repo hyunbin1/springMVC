@@ -5,21 +5,17 @@ import hello.servlet.domain.member.MemberRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
 @RequestMapping(value = "/springmvc/v3/members")
 public class SpringMemberControllerV3 {
 
-    private MemberRepository memberRepository = MemberRepository.getInstance();
+    final private MemberRepository memberRepository = MemberRepository.getInstance();
 
 //    @RequestMapping(value = "new-form", method = RequestMethod.GET)
     @GetMapping("/new-form")
-    // ModelAndView를 string으로 대신 받아도 된다.
+    // ModelAndView 를 string 으로 대신 받아도 된다.
     public String newForm() {
         return "new-form";
     }
