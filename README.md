@@ -40,7 +40,11 @@
 
 ---
 
-## 로깅 알아보기
+
+
+
+
+# 로깅 알아보기
 
 지금까지 우리는 코드에 System.out.println()을 사용해서 콘솔에 필요한 정보를 출력하였다. 하지만 실무에서는 이 방법을 사용하지 않는다. 그렇다면 어떻게 실무에서는 로깅 처리를 할까?
 
@@ -57,17 +61,61 @@
    - SLF4J = http://www.slf4j.org
    - Logback = http://logback.qos.ch
 
+
+
 2. **로그 선언**:
 
-   ```java
-   private Logge log = LoggerFactory.getLogger(getClass();
-   private static final Logger log = LoggerFactory.getLogger(Xxx.class)
-   @Slf4j // 롬복 사용 가능
-   ```
+```java
+private Logge log = LoggerFactory.getLogger(getClass();
+private static final Logger log = LoggerFactory.getLogger(Xxx.class)
+@Slf4j // 롬복 사용 가능
+```
+
+
 
 3. **로그 호출:**
 
-   ```
-   log.info("hello");
-   System.out.println("Hello");
-   ```
+```
+log.info("hello");
+System.out.println("Hello");
+```
+
+
+
+4. **매핑 정보**: **@RestController**
+
+- @Controller는 반환 값이 String이면 뷰 이름으로 인식된다. 따라서 뷰를 찾고 뷰가 렌더링 된다.
+- @RestController는 반환 값으로 뷰를 찾는 것이 아니라, HTTP 메세지 바디에 바로 입력한다. 그러므로 실행 결과로 ok 메세지를 받을 수 있다. 이는 @ResponseBody와 연관이 있다. 
+
+
+
+5. **테스트:**
+
+- 로그가 출력되는 포멧 확인: 시간, 로그 레벨, 프로세스 ID, 클래스명, 로그 메시지
+- 로그 레벨 설정을 변경해서 출력 결과를 보자. -> resorce 폴더 안 application.properties 에서 설정
+  - LEVEL 단계 순위: TRACE > DEBUG > INFO > WARN > ERROR
+  - 개발 서버는 debug 사용
+  - 운영 서버는 info 사용 - 쓰지 않아도 적용되는 기본값 - logging.level.root = info 이다.
+- @Slf4j로 변경하여 사용하면 (rombok이 제공) - private final Logger log = LoggerFactory.getLogger(getlass()); 를 사용하지 않아도 된다. 
+
+
+
+6. 올바른 로그 사용법: log.debug("data={}, ") 
+
+   사용하면 안되는 표기법: log.debug("data="+data")  - 이유: +라는 연산이 항상 동작되면서, 이 로그가 사용할 필요가 없는 순간에도 cpu와 메모리를 사용한다. 
+
+
+
+7. **로그 사용시 장점**:
+
+- 쓰레드 정보, 클래스 이름 같은 부가 정보를 함께 볼 수 있고, 출력 모양을 조정할 수 있다.
+- 로그 레벨에 따라 개발 서버에서는 모든 로그를 출력하고, 운영서버에서는 출력하지 않는 등 로그를 상황에 맞게 조절할 수 있다. 
+- 시스템 아웃 콘솔에만 출력하는 것이 아니라, 파일이나 네트워크 등 로그를 별도의 위치에 남길 수 있다. 특히 파일로 남길 때는 일별, 특정 용량에 따라 로그를 분할하는 것도 가능하다.
+- 성능도 일반 System.out보다 좋다. (내부 버퍼링, 멀티 쓰레드 등등) 따라서 실무에서는 꼭 로그를 사용해야한다.
+
+
+
+8. 더 공부할 부분: 
+
+- 로그에 대해서 더 자세한 내용은 slf4j, logback을 검색해보자
+- 스프링 부트가 제공하는 로그 기능도 참고하자.

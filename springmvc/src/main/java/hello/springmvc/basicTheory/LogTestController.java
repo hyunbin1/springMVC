@@ -20,7 +20,7 @@ public class LogTestController {
 
         //로그 출력
         System.out.println("name = "+ name + " === System.out.println으로 출력한 것"); // 이전까지 사용한 로글 출력
-        log.info(" info log={} === info.log로 출력한 것", name); // 실무에 적합한 로그 출력
+        log.info(" info log={} == info.log로 출력한 것", name); // 실무에 적합한 로그 출력
 
         // 로그의 장점: 로그를 찍을 때,로그 레벨에 따라 출력할 수 있다.
          log.trace("trace log={}", name); //
