@@ -126,3 +126,57 @@ System.out.println("Hello");
 
 **요청 매핑**: 요청이 왔을 때 어떤 컨트롤러가 호출이 되어야 하는지 매핑하는 것이다.  이는 url 매핑 뿐만 아니라 여러가지 요소를 가지고 매핑을 한다.
 
+**코드 사용법:**
+
+```java
+@RequestMapping(value="url", method = RequestMethod.GET){}
+```
+
+하지만 애노테이션을 이용하면 편리하게 축약하여 사용할 수 있다. 
+
+```java
+@GetMapping
+@PostMapping
+@PutMapping
+@DeleteMapping
+@PatchMapping
+```
+
+
+
+### PathVariable(경로 변수) - 요즘 매우 중요함
+
+```java
+/*
+1. 변수명이 같으면 생략 가능한 기능
+2. 사용법: Pathvariable("userId") String userId -> @PathVariable userId
+*/
+
+@GetMapping("/mapping/{userId}")
+public String mappingPath(@PathVariable("userId") String data){
+    log.info("mappingPath userId={}", data);
+    return "ok";
+}
+
+@GetMapping("/mapping/{userId}")
+public String mappingPath(@PathVariable String userId){ // 파라미터 변수명이 매핑하려는 urlID와 같다면 추가적인 변수 생략 가능하다.
+    log.info("mappingPath userId={}", userId);
+    return "ok";
+}
+```
+
+url {}친 부분에 자신이 원하는 url을 대입하면, String data로 파라미터가 받아들여져서 {userId}부분이 채워지게 된다. 이는 경로 변수라고 하는데, 변수를 통하여 수시로 경로를 바꿔줄 수 있는 템플릿이라고 생각하면 된다. 
+
+최근 HTTP API는 리소스 경로에 식별자를 넣는 스타일을 선호한다 - ?userA 와 같은 형식은 쿼리 파라미터이다.
+
+Ex. 
+
+1. /mapping/userA
+2. /users/1
+3. @RequestMapping은 URL 경로를 템플릿 화 할 수 있는데, @PathVariable을 사용하면 매칭 되는 부분을 편리하게 조회할 수 있다. 
+4. @PathVariable의 이름과 파라미터 이름이 같으면 생략할 수 있다. 
+
+
+
+
+
