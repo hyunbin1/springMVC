@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Controller
@@ -29,14 +30,14 @@ public class BasicItemController {
     @GetMapping
     public String items(Model model) {
         List<Item> items = itemRepository.findAll();
-        model.addAttribute("item", items);
+        model.addAttribute("items", items);
         return "basic/items";
     }
 
     // 테스트 용 초기 데이터 추가
-    @PostMapping
+    @PostConstruct
     public void init(){
-        itemRepository.save(new Item("ItemA", 10000, 10));
-        itemRepository.save(new Item("ItemB", 20000, 20));
+        itemRepository.save(new Item("TestA", 10000, 10));
+        itemRepository.save(new Item("TestB", 20000, 20));
     }
 }
