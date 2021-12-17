@@ -30,7 +30,7 @@ public class BasicItemController {
     public String items(Model model) {
         List<Item> items = itemRepository.findAll();
         model.addAttribute("item", items);
-        return "basic/item";
+        return "basic/items";
     }
 
     // 테스트 용 초기 데이터 추가
