@@ -1,6 +1,5 @@
 package hello.itemService.web;
 
-
 import hello.itemService.domain.item.Item;
 import hello.itemService.domain.item.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +42,7 @@ public class BasicItemController {
         return "basic/item";
     }
 
-    // 상품 등록 폼 조회
+    // 상품 등록 페이지 조회
     @GetMapping("/add")
     public String addForm() {
         return "basic/addForm";
@@ -89,6 +88,32 @@ public class BasicItemController {
 
         return "basic/item";
     }
+
+    //상품 수정 페이지 조회
+    @GetMapping("/{itemId}/edit")
+    public String editForm(@PathVariable Long itemId, Model model){
+        Item item = itemRepository.findById(itemId);
+        model.addAttribute("item", item);
+        return "basic/editForm";
+    }
+
+    // 상품 수정 저장
+    @PostMapping("/{itemId}/edit")
+    public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
+        itemRepository.update(itemId, item);
+        return "redirect:/basic/items/{itemId}";
+    }
+
+    // 상품 수정 취소 기능은 추가하지 않아도 된다. - 처리되는 데이터가 없기 때문
+
+
+    
+    
+//    @PostMapping("/{itemId}/edit")
+//    public String edit(Item item){
+//
+//    }
+
 
 
     // 테스트 용 초기 데이터 추가
